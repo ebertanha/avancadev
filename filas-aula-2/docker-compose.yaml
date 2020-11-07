@@ -2,6 +2,25 @@ version: '3'
 
 services:
 
+  microservice-a:
+    build: a/.
+    ports:
+      - "9090:9090"
+    depends_on: 
+      - microservice-b
+
+  microservice-b:
+    build: b/.
+    ports:
+      - "9091:9091"
+    depends_on: 
+      - rabbit
+
+  microservice-c:
+    build: c/.
+    ports:
+      - "9092:9092"
+
   rabbit:
     image: "rabbitmq:3-management"
     environment:
